@@ -33,14 +33,52 @@ const phrases = [
     "The sunflowers follow the sun"
 ];
 
+// Generate random phrase
 function getRandomPhrase(){
     return phrases [Math.floor(Math.random() * phrases.length)];
 }
 
 function generatePoem(){
+    const lineCount = document.getElementById('lineCount').value;
     let poem ='';
-    for (let i=0; i<4; i++) {
+    for (let i=0; i < lineCount; i++) {
         poem += getRandomPhrase() + '<br>';
     }
     document.getElementById('poem').innerHTML = poem;
+}
+
+// Add custom phrase
+document.getElementById('addPhrase').addEventListener('click', addCustomPhrase);
+
+function addCustomPhrase(){
+    const customPhrase = document.getElementById('customPhrase').value;
+    if(customPhrase.trim() !== ''){
+        phrases.push(customPhrase.trim());
+        document.getElementById('customPhrase').value = '';
+        alert('Phrase added succesfully!');
+    } else{
+        alert('Please enter a valid phrase.');
+    }
+}
+
+// Download Poem button
+document.getElementById('download').addEventListener('click', downloadPoem);
+
+function downloadPoem() {
+    const poem = document.getElementById('poem').innerHTML.replace(/<br>/g, '\n');
+    const blob = new Blob([poem], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'poem.txt';
+    link.click();
+}
+
+// Speak function
+document.getElementById('speak').addEventListener('click', speakPoem);
+
+function speakPoem(){
+    const poemText = document.getElementById('poem').innerText;
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(poemText);
+    synth.speak(utterance);
 }

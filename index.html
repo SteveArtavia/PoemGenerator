@@ -12,7 +12,21 @@
         <div class="container">
             <h1 class="title">Random Poem Generator</h1>
             <div id="poem" class="box"></div>
+            <div class="field">
+                <label class="label">Number of Lines</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="lineCount">
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <button id="generate" class="button is-primary">Generate Poem</button>
+            <button id="download" class="button is-success">Download Poem</button>
+            <button id="speak" class="button is-warning">Speak Poem</button>
         </div>
     </section>
 
